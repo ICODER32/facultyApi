@@ -1,0 +1,20 @@
+<% for(var i=0;i < data.length; i++){%>
+
+    <tr>
+        <td>
+            <%=data[i].name %>
+        </td>
+        <td>
+            <%=data[i].email %>
+        </td>
+        <td>
+            <%=data[i].phone %>
+        </td>
+        <td>
+            <a class="btn" href="/update?id=<%= data[i]._id %>"><i class="fa-regular fa-pen-to-square"></i></a>
+            <a class="btn delete" data-id=<%=data[i]._id %> href="#"><i
+                    style="margin-left: 5px; pointer-events: none; color:red;"
+                    class="fa-sharp fa-solid fa-trash"></i></a>
+        </td>
+    </tr>
+    <%}%>

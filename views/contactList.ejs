@@ -1,0 +1,90 @@
+<html>
+
+<%- include('partials/header.ejs') %>
+    <style>
+        .formContainer {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .formContainer>button {
+            outline: none;
+            border: none;
+            padding: 5px 10px;
+        }
+
+        .formContainer>button>a {
+            text-decoration: none;
+            color: #000;
+
+        }
+
+        .table {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .table>tbody>tr:hover {
+            background-color: lightblue;
+        }
+
+        .btn {
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: lightcoral;
+        }
+    </style>
+
+    <body>
+        <%- include('partials/navbar.ejs') %>
+
+            <div class="formContainer">
+                <button>
+                    <a href="/add">Create New User</a>
+                </button>
+            </div>
+            <div
+                style="margin-top: 20px; display: flex; align-items: center; justify-content: space-around; width: 100%;">
+                <h5>Contact List</h5>
+                <a href="/logout">Logout</a>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%- include('partials/contact_Row.ejs') %>
+                </tbody>
+            </table>
+            <script>
+                const btn = document.getElementsByClassName('delete');
+                for (var i = 0; i < btn.length; i++) {
+                    (function (index) {
+                        btn[i].addEventListener('click', async (e) => {
+                            const id = e.target.getAttribute('data-id');
+
+                            const res = await fetch(`https://compassign229.herokuapp.com/api/contact/${id}`, {
+                                method: "DELETE",
+                            })
+                            if (res.ok) {
+                                alert('Data Deleted Successfully')
+                                location.reload()
+                            }
+
+                        })
+                    })(i);
+                }
+            </script>
+    </body>
+
+</html>

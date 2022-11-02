@@ -1,0 +1,61 @@
+<html>
+
+<%- include('partials/header.ejs') %>
+
+    <style>
+        form {
+            display: flex;
+            width: 40%;
+            margin: auto;
+            gap: 20px;
+            flex-direction: column;
+            padding: 20px;
+            background-color: lightgray;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+
+    <body>
+        <%- include('partials/navbar.ejs') %>
+            <div style="margin-top: 50px; margin-left: 50px;" class="filter">
+                <button style="border: none; outline: none; padding:5px 10px ;">
+                    <a style="color: #000; text-decoration: none;" href="/contactList"> <i
+                            class="fa-regular fa-xmark"></i> Cancel</a>
+                </button>
+            </div>
+
+            <form id="update_user">
+                <h5>Update Contact</h5>
+                <input type="text" hidden value="<%= data[0]._id %>">
+                <input type="text" value="<%= data[0].name %>" name="name" placeholder="Enter Name" id="">
+                <input type="text" name="email" value="<%= data[0].email %>" placeholder="Enter Email" id="">
+                <input type="text" name="phone" value="<%= data[0].phone %>" placeholder="Enter Phone" id="">
+                <button type="submit">Update</button>
+            </form>
+
+            <script>
+                document.getElementById('update_user').addEventListener('submit', async (e) => {
+                    e.preventDefault()
+                    const id = e.target[0].value;
+                    const name = e.target[1].value;
+                    const email = e.target[2].value;
+                    const phone = e.target[3].value;
+                    const request = await fetch(`https://compassign229.herokuapp.com/api/contact/${id}`, {
+                        method: "PUT",
+                        headers: {
+                            'Content-Type': "application/json"
+                        },
+                        body: JSON.stringify({ name, email, phone })
+                    })
+                    if (request.ok) {
+                        alert('Data Updated')
+                        location.replace('/contactList')
+                    } else {
+                        alert('An Error Occured while updating data')
+                    }
+                })
+            </script>
+    </body>
+
+</html>

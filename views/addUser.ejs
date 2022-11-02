@@ -1,0 +1,32 @@
+<html>
+
+<%- include('partials/header.ejs') %>
+
+    <style>
+        form {
+            display: flex;
+            width: 40%;
+            margin: auto;
+            gap: 20px;
+            flex-direction: column;
+            padding: 20px;
+            background-color: lightgray;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+
+    <body>
+        <%- include('partials/navbar.ejs') %>
+            <div style="margin-top: 50px; margin-left: 50px;" class="filter">
+                <button style="border: none; outline: none; padding:5px 10px ;">
+                    <a style="color: #000; text-decoration: none;" href="/contactList"> <i
+                            class="fa-sharp fa-solid fa-users"></i> All Users</a>
+                </button>
+            </div>
+
+            <%- include('partials/form.ejs') %>
+
+    </body>
+
+</html>
